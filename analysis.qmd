@@ -1,0 +1,80 @@
+---
+title: "analysis"
+---
+
+Load libraries
+
+```{r}
+#| output: false
+library(babynames)
+library(knitr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(pheatmap)
+```
+
+Display the first 10 lines of the babynames table
+
+```{r}
+head(babynames) |> kable()
+```
+
+Define two functions
+
+-   **get_most_frequent**: Gets the most frequent babynames over a time-period.
+
+-   **plot_top**: from the output of get_most_frequent. Plot the top n most popular names.
+
+```{r}
+#| code-fold: true
+get_most_frequent <- function(babynames, select_sex, from = 1950) {
+  most_freq <- babynames |>
+    filter(sex == select_sex, year > from) |>
+    group_by(name) |>
+    summarise(average = mean(prop)) |>
+    arrange(desc(average))
+    
+  return(list(
+    babynames = babynames,
+    most_frequent = most_freq,
+    sex = select_sex,
+    from = from))
+}
+
+plot_top <- function(x, top = 10) {
+  topx <- x$most_frequent$name[1:top]
+  
+  p <- x$babynames |>
+    filter(name %in% topx, sex == x$sex, year > x$from) |>
+    ggplot(aes(x = year, y = prop, color = name)) +
+    geom_line() +
+    scale_color_brewer(palette = "Paired") +
+    theme_classic()
+  
+  return(p)
+}
+
+```
+
+Now, let's plot the top 10 most frequent baby names from 1950 for girls:
+
+```{r}
+#| label: fig-girls
+#| fig-cap: "Plot of the top 10 most frequent baby names from 1950 for girls"
+get_most_frequent(babynames, select_sex = "F") |>
+  plot_top()
+```
+
+In @fig-girls, we see that the most popular name was Jennifer, peaking in \~1975. All the names were not so popular anymore in the 2000s.
+
+What about the boy's most frequent names? We plot again the top 10 most frequent baby names from 1950, but this time for boys:
+
+```{r}
+#| label: fig-boys
+#| fig-cap: "Plot of the top 10 most frequent baby names from 1950 for boys"
+get_most_frequent(babynames, select_sex = "M") |>
+  plot_top()
+```
+
+For the boys, Michael was a very popular name. But also here, the names are not so popular in the 2000s anymore.

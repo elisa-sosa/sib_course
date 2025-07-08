@@ -1,0 +1,25 @@
+---
+title: "25-07-08_CourseExercise"
+---
+Sources 
+- SIB website with course materials here: https://sib-swiss.github.io/reproducible-analysis-training/
+- Figure cheat sheet: https://quarto.org/docs/authoring/figures.html
+
+Elisa's hints and insights
+- {r, echo=FALSE} if you want to NOT show the code, just the result
+- #|code-fold = TRUE if you want to hide 
+
+
+In this project we aim to visualize the trends of the most frequently used babynames from 1880 to 2017 in the United States. We do this by:
+
+-   Understanding the different columns of the data set
+-   Find the top 10 most frequently used baby names in the data for:
+    -   girls
+    -   boys
+-   Plot the yearly trend of the top 10 baby names
+
+
+[![](https://www.flickr.com/photos/76616082@N04/14877777836){fig-align="right" width=400}
+```{r}
+1 + 1
+```
