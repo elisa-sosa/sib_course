@@ -1,6 +1,9 @@
 ---
 title: "25-07-08_CourseExercise"
 ---
+[![DOI](https://zenodo.org/badge/1016056968.svg)](https://doi.org/10.5281/zenodo.15838064)
+
+
 Sources 
 - SIB website with course materials here: https://sib-swiss.github.io/reproducible-analysis-training/
 - Figure cheat sheet: https://quarto.org/docs/authoring/figures.html
